@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>T-SQL Training</title>
+</head>
+<body>
+<svg width="1010" height="746" style='stroke-width: 0px; background-color: white;'>
+<line x1=0 y1=0 x2=1010 y2=0 style="stroke:rgb(0,0,255);stroke-width:1"/>
+<line x1=1010 y1=0 x2=1010 y2=746 style="stroke:rgb(0,0,255);stroke-width:1"/>
+<line x1=1010 y1=746 x2=0 y2=746 style="stroke:rgb(0,0,255);stroke-width:1"/>
+<line x1=0 y1=746 x2=0 y2=0 style="stroke:rgb(0,0,255);stroke-width:1"/>
+
+<defs>
+<marker id="arrow" markerWidth=8 markerHeight=8 refx=0 refy=2 orient="auto" markUnits="strokWidth">
+<path d="M0,0 L0,4 L4,2 z" fill=#FF0000 />
+</marker>
+</defs>
+
+<text x=400 y=70 fill=#000000 style="font-weight: bold;" font-family="Arial(Heading)" font-size=26>What is "Window"?</text>
+
+<g transform="translate(90,10)">
+<rect x=150 y=140 width=120 height=30 fill=#BBBBBB />
+<rect x=272 y=140 width=220 height=30 fill=#BBBBBB />
+<rect x=494 y=140 width=160 height=30 fill=#BBBBBB />
+
+<rect x=150 y=172 width=120 height=30 fill=#EEEEEE />
+<rect x=272 y=172 width=220 height=30 fill=#EEEEEE />
+<rect x=494 y=172 width=160 height=30 fill=#EEEEEE />
+
+<rect x=150 y=204 width=120 height=30 fill=#EEEEEE />
+<rect x=272 y=204 width=220 height=30 fill=#EEEEEE />
+<rect x=494 y=204 width=160 height=30 fill=#EEEEEE />
+
+<rect x=150 y=236 width=120 height=30 fill=#EEEEEE />
+<rect x=272 y=236 width=220 height=30 fill=#EEEEEE />
+<rect x=494 y=236 width=160 height=30 fill=#EEEEEE />
+
+<rect x=150 y=268 width=120 height=30 fill=#EEEEEE />
+<rect x=272 y=268 width=220 height=30 fill=#EEEEEE />
+<rect x=494 y=268 width=160 height=30 fill=#EEEEEE />
+
+<rect x=150 y=300 width=120 height=30 fill=#EEEEEE />
+<rect x=272 y=300 width=220 height=30 fill=#EEEEEE />
+<rect x=494 y=300 width=160 height=30 fill=#EEEEEE />
+
+<rect x=150 y=332 width=120 height=30 fill=#EEEEEE />
+<rect x=272 y=332 width=220 height=30 fill=#EEEEEE />
+<rect x=494 y=332 width=160 height=30 fill=#EEEEEE />
+
+<rect x=150 y=364 width=120 height=30 fill=#EEEEEE />
+<rect x=272 y=364 width=220 height=30 fill=#EEEEEE />
+<rect x=494 y=364 width=160 height=30 fill=#EEEEEE />
+
+<rect x=150 y=396 width=120 height=30 fill=#EEEEEE />
+<rect x=272 y=396 width=220 height=30 fill=#EEEEEE />
+<rect x=494 y=396 width=160 height=30 fill=#EEEEEE />
+
+<rect x=150 y=428 width=120 height=30 fill=#EEEEEE />
+<rect x=272 y=428 width=220 height=30 fill=#EEEEEE />
+<rect x=494 y=428 width=160 height=30 fill=#EEEEEE />
+
+<rect x=150 y=460 width=120 height=30 fill=#EEEEEE />
+<rect x=272 y=460 width=220 height=30 fill=#EEEEEE />
+<rect x=494 y=460 width=160 height=30 fill=#EEEEEE />
+
+<rect x=150 y=492 width=120 height=30 fill=#EEEEEE />
+<rect x=272 y=492 width=220 height=30 fill=#EEEEEE />
+<rect x=494 y=492 width=160 height=30 fill=#EEEEEE />
+
+<rect x=150 y=524 width=120 height=30 fill=#EEEEEE />
+<rect x=272 y=524 width=220 height=30 fill=#EEEEEE />
+<rect x=494 y=524 width=160 height=30 fill=#EEEEEE />
+
+<text x=184 y=160 fill=#000000 font-family="Arial" font-size=17>OrderID</text>
+<text x=340 y=160 fill=#000000 font-family="Arial" font-size=17>EmployeeID</text>
+<text x=564 y=160 fill=#000000 font-family="Arial" font-size=17>Qty</text>
+
+<text x=200 y=192 fill=#000000 font-family="Arial" font-size=17>1</text>
+<text x=340 y=192 fill=#000000 font-family="Arial" font-size=17>EMP0001</text>
+<text x=544 y=192 fill=#000000 font-family="Arial" font-size=17>12.45</text>
+
+<text x=200 y=224 fill=#000000 font-family="Arial" font-size=17>2</text>
+<text x=340 y=224 fill=#000000 font-family="Arial" font-size=17>EMP0001</text>
+<text x=544 y=224 fill=#000000 font-family="Arial" font-size=17>189.2</text>
+
+<text x=200 y=256 fill=#000000 font-family="Arial" font-size=17>3</text>
+<text x=340 y=256 fill=#000000 font-family="Arial" font-size=17>EMP0001</text>
+<text x=544 y=256 fill=#000000 font-family="Arial" font-size=17>296.5</text>
+
+<text x=200 y=288 fill=#000000 font-family="Arial" font-size=17>4</text>
+<text x=340 y=288 fill=#000000 font-family="Arial" font-size=17>EMP0002</text>
+<text x=544 y=288 fill=#000000 font-family="Arial" font-size=17>10.18</text>
+
+<text x=200 y=320 fill=#000000 font-family="Arial" font-size=17>5</text>
+<text x=340 y=320 fill=#000000 font-family="Arial" font-size=17>EMP0002</text>
+<text x=544 y=320 fill=#000000 font-family="Arial" font-size=17>78.62</text>
+
+<text x=200 y=352 fill=#000000 font-family="Arial" font-size=17>6</text>
+<text x=340 y=352 fill=#000000 font-family="Arial" font-size=17>EMP0108</text>
+<text x=544 y=352 fill=#000000 font-family="Arial" font-size=17>127.13</text>
+
+<text x=200 y=384 fill=#000000 font-family="Arial" font-size=17>7</text>
+<text x=340 y=384 fill=#000000 font-family="Arial" font-size=17>EMP0108</text>
+<text x=544 y=384 fill=#000000 font-family="Arial" font-size=17>80.76</text>
+
+<text x=200 y=416 fill=#000000 font-family="Arial" font-size=17>8</text>
+<text x=340 y=416 fill=#000000 font-family="Arial" font-size=17>EMP0108</text>
+<text x=544 y=416 fill=#000000 font-family="Arial" font-size=17>129.44</text>
+
+<text x=200 y=448 fill=#000000 font-family="Arial" font-size=17>9</text>
+<text x=340 y=448 fill=#000000 font-family="Arial" font-size=17>EMP0044</text>
+<text x=544 y=448 fill=#000000 font-family="Arial" font-size=17>45.2</text>
+
+<text x=200 y=480 fill=#000000 font-family="Arial" font-size=17>10</text>
+<text x=340 y=480 fill=#000000 font-family="Arial" font-size=17>EMP0044</text>
+<text x=544 y=480 fill=#000000 font-family="Arial" font-size=17>102.4</text>
+
+<text x=200 y=512 fill=#000000 font-family="Arial" font-size=17>11</text>
+<text x=340 y=512 fill=#000000 font-family="Arial" font-size=17>EMP0044</text>
+<text x=544 y=512 fill=#000000 font-family="Arial" font-size=17>312.56</text>
+
+<text x=200 y=544 fill=#000000 font-family="Arial" font-size=17>12</text>
+<text x=340 y=544 fill=#000000 font-family="Arial" font-size=17>EMP0044</text>
+<text x=544 y=544 fill=#000000 font-family="Arial" font-size=17>212.99</text>
+
+<rect x=148 y=172 width=508 height=94 fill=none stroke=#FF0000 stroke-width=2 />
+<rect x=148 y=270 width=508 height=60 fill=none stroke=#FF0000 stroke-width=2 />
+<rect x=148 y=334 width=508 height=92 fill=none stroke=#FF0000 stroke-width=2 />
+<rect x=148 y=430 width=508 height=122 fill=none stroke=#FF0000 stroke-width=2 />
+
+<path fill="none" stroke=#FF0000 marker-end="url(#arrow)" stroke-width=4 d="M720,220 h-45" />
+<path fill="none" stroke=#FF0000 marker-end="url(#arrow)" stroke-width=4 d="M720,300 h-45" />
+<path fill="none" stroke=#FF0000 marker-end="url(#arrow)" stroke-width=4 d="M720,380 h-45" />
+<path fill="none" stroke=#FF0000 marker-end="url(#arrow)" stroke-width=4 d="M720,490 h-45" />
+</g>
+<rect x=0 y=716 width=1010 height=32 style="fill:red"/>
+<text x=20 y=737 fill=#FFFFFF font-family="Book Antiqua" font-size=17>Copyright 2016 &nbsp;&nbsp;| &nbsp;&nbsp;   http://www.boobooke.com</text>
+<a xlink:href="p10.html">
+<g transform="translate(982,721) scale(0.02,0.02)">
+<path d="M291.8,990c-10.6,0-21.3-3.8-29.8-11.4c-18.3-16.4-19.8-44.6-3.4-62.9l374.1-416.5L258.8,84.4c-16.5-18.3-15-46.4,3.3-62.9c18.3-16.5,46.4-15,62.9,3.3l427.8,474.4L325,975.2C316.2,985,304,990,291.8,990z" style="fill:white"/>
+</g>
+</svg>
+</a>
+</svg>
+</body>
+</html>
